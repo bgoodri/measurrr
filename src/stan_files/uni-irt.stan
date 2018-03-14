@@ -1,3 +1,5 @@
+# include /chunks/license.stan
+
 data {
 	int<lower=1> J;								// number of respondents
 	int<lower=1> K;								// number of items
@@ -18,9 +20,9 @@ model {
 	b ~ normal(0, 10);
 	a ~ lognormal(0.5, 1);
 	c ~ beta(5, 17);
-	
+
 	for(n in 1:N)
 		eta[n] = c[kk[n]] + (1 - c[kk[n]]) * inv_logit(a[kk[n]] * (theta[jj[n]] - b[kk[n]]));
-	
+
 	y ~ bernoulli(eta);
 }
